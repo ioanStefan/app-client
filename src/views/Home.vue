@@ -1,18 +1,44 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div
+      class="error"
+      v-if="err"
+    >{{msg}}</div>
+    <b-container>
+      <b-table
+        striped
+        hover
+        :items="projects"
+      />
+    </b-container>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
-  name: 'home',
-  components: {
-    HelloWorld
+  name: "home",
+  data: function() {
+    return {
+      projects: [],
+      err: false,
+      msg: ""
+    };
+  },
+  components: {},
+  created() {
+    let _this = this;
+    this.$axios
+      .get("/projects")
+      .then(function(response) {
+        if (response.data.success) _this.projects = response.data.projects;
+        else {
+          _this.err = true;
+          _this.msg = response.data.msg;
+        }
+      })
+      .catch(function(error) {});
   }
-}
+};
 </script>

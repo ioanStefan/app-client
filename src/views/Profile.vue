@@ -24,7 +24,7 @@ export default {
     this.$axios
       .get("/users/profile")
       .then(function(response) {
-        _this.profile = reponse.data.profile;
+        _this.profile = response.data.profile;
       })
       .catch(function(err) {});
   }

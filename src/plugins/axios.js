@@ -4,7 +4,8 @@ import Vue from 'vue';
 import axios from "axios";
 
 // Full config:  https://github.com/axios/axios#request-config
-axios.defaults.baseURL = 'http://localhost:3000';
+// axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = '';
 axios.defaults.headers.common['Authorization'] = localStorage.getItem("id_token");
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 

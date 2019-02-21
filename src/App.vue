@@ -1,6 +1,10 @@
 <template>
   <div id="app">
     <div id="nav">
+      <span
+        v-if="user"
+        style="padding-right: 50px"
+      >{{user}}</span>
       <router-link to="/">Projects</router-link> |
       <router-link
         v-if="!user"
@@ -20,11 +24,12 @@
         to="/profile"
       >Profile</router-link>
       |
-      <router-link
+      <b-button
+        class="logout-btn"
+        variant="link"
         v-if="user"
         @click="logout"
-        to="/"
-      >Log out</router-link>
+      >Logout</b-button>
     </div>
     <router-view />
   </div>
@@ -42,7 +47,8 @@ export default {
       localStorage.removeItem("id_token");
       localStorage.removeItem("user");
 
-      this.$router.psh("/");
+      this.$router.push("/");
+      location.reload();
     }
   },
   created() {
@@ -81,5 +87,9 @@ export default {
       color: #42b983;
     }
   }
+}
+.logout-btn {
+  font-weight: bold !important;
+  color: #2c3e50 !important;
 }
 </style>
